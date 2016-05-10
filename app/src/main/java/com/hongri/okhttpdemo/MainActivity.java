@@ -1,18 +1,20 @@
 package com.hongri.okhttpdemo;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 /**
  *
  *
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     public static String YAO = "yao";
 
     private String url = "http://g.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd96bf48f6f3c01213fb90e91af.jpg";
