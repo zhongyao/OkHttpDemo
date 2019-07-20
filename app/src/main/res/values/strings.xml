@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">OkHttpDemo</string>
     <string name="action_settings">Settings</string>
+    <string name="get_request">OkHttp的Get请求</string>
+    <string name="post_request">OkHttp的Post请求</string>
+    <string name="upload_request">OkHttp的上传请求</string>
+    <string name="download_request">OkHttp的下载请求</string>
 </resources>
