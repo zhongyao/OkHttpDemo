@@ -76,8 +76,8 @@ public class CommonJsonCallback implements Callback {
         }
         try {
             JSONObject resultObj = new JSONObject(result);
-            if (resultObj.has(RESULT_CODE)) {
-                if (resultObj.optInt(RESULT_CODE) == RESULT_CODE_VALUE) {
+            if (true/*resultObj.has(RESULT_CODE)*/) {
+                if (true/*resultObj.optInt(RESULT_CODE) == RESULT_CODE_VALUE*/) {
                     if (mClass == null) {
                         mListener.onSuccess(resultObj);
                     } else {

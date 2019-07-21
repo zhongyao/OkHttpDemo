@@ -15,11 +15,9 @@ public class OkHttpModel extends OkHttpBaseModel {
 
     private IDisposeDataCallback mListener;
 
-    public void setListener(IDisposeDataCallback listener) {
-        mListener = listener;
-    }
+    public void getRequest(String url, RequestParams params, IDisposeDataCallback listener) {
 
-    public void getRequest(String url, RequestParams params) {
+        mListener = listener;
 
         CommonOkHttpClient.get(CommonRequest.createGetRequest(url, params), new DisposeDataHandler(
             new IDisposeDataListener() {
@@ -32,26 +30,31 @@ public class OkHttpModel extends OkHttpBaseModel {
 
                 @Override
                 public void onFailure(Object errorObj) {
-                    if (mListener != null) {}
-                    mListener.onFailure(errorObj, RequestType.GET);
+                    if (mListener != null) {
+                        mListener.onFailure(errorObj, RequestType.GET);
+                    }
                 }
             }));
     }
 
-    public void postRequest(String url, RequestParams params) {
+    public void postRequest(String url, RequestParams params, IDisposeDataCallback listener) {
+
+        mListener = listener;
+
         CommonOkHttpClient.post(CommonRequest.createPostRequest(url, params), new DisposeDataHandler(
             new IDisposeDataListener() {
                 @Override
                 public void onSuccess(Object responseObj) {
                     if (mListener != null) {
-                        mListener.onSuccess(responseObj,RequestType.POST);
+                        mListener.onSuccess(responseObj, RequestType.POST);
                     }
                 }
 
                 @Override
                 public void onFailure(Object errorObj) {
-                    if (mListener != null) {}
-                    mListener.onFailure(errorObj,RequestType.POST);
+                    if (mListener != null) {
+                        mListener.onFailure(errorObj, RequestType.POST);
+                    }
                 }
             }));
     }

@@ -1,5 +1,6 @@
 package com.hongri.okhttpdemo;
 
+import com.hongri.okhttpdemo.okhttp.listener.IDisposeDataCallback;
 import com.hongri.okhttpdemo.okhttp.request.RequestParams;
 
 /**
@@ -7,7 +8,7 @@ import com.hongri.okhttpdemo.okhttp.request.RequestParams;
  */
 public abstract class OkHttpBaseModel {
 
-    public void getRequest(String url, RequestParams params) {}
+    public void getRequest(String url, RequestParams params, IDisposeDataCallback listener) {}
 
-    public void postRequest(String url, RequestParams params) {}
+    public void postRequest(String url, RequestParams params, IDisposeDataCallback listener) {}
 }

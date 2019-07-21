@@ -16,11 +16,11 @@ public class OkHttpPresenter implements IDisposeDataCallback {
     }
 
     public void getRequest(String url, RequestParams params) {
-        OkHttpModelManager.newInstance(OkHttpModel.class.getName()).getRequest(url, params);
+        OkHttpModelManager.newInstance(OkHttpModel.class.getName()).getRequest(url, params,this);
     }
 
     public void postRequest(String url, RequestParams params) {
-        OkHttpModelManager.newInstance(OkHttpModel.class.getName()).postRequest(url, params);
+        OkHttpModelManager.newInstance(OkHttpModel.class.getName()).postRequest(url, params,this);
     }
 
     @Override
