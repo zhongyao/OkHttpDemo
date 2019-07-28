@@ -81,4 +81,17 @@ public class CommonRequest {
         MultipartBody body = builder.build();
         return new Request.Builder().url(url).post(body).build();
     }
+
+    /**
+     * 获取图片下载请求
+     */
+    public static Request createDownloadRequest(String url, RequestParams params) {
+        StringBuilder urlBuilder = new StringBuilder(url).append("?");
+        if (params != null) {
+            for (Map.Entry<String, String> entry : params.urlParams.entrySet()) {
+                urlBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+            }
+        }
+        return new Request.Builder().url(urlBuilder.substring(0, urlBuilder.length() - 1)).get().build();
+    }
 }

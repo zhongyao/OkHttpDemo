@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -87,6 +88,7 @@ public class CommonFileCallback implements Callback {
             return null;
         }
 
+        mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
         InputStream inputStream = null;
         File file = null;
         FileOutputStream fos = null;
@@ -97,6 +99,9 @@ public class CommonFileCallback implements Callback {
         try {
             file = new File(mFilePath);
             fos = new FileOutputStream(file);
+            if (response.body() == null) {
+                return null;
+            }
             inputStream = response.body().byteStream();
             sumLength = (double)response.body().contentLength();
 

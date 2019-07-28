@@ -1,9 +1,11 @@
 package com.hongri.okhttpdemo;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.hongri.okhttpdemo.util.OkConstant;
 
@@ -11,12 +13,11 @@ import com.hongri.okhttpdemo.util.OkConstant;
  * 用来测试OKHttp的简单使用
  */
 public class OkHttpActivity extends Activity implements View.OnClickListener {
-    public static String YAO = "yao";
-
-    private String url = "http://g.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd96bf48f6f3c01213fb90e91af.jpg";
 
     private Button getBtn, postBtn, uploadBtn, downloadBtn;
     private TextView getShow;
+    private ImageView downloadShow;
+    private TextView imageLoading;
 
     private OkHttpPresenter mPresenter;
 
@@ -33,6 +34,8 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         downloadBtn = findViewById(R.id.downloadBtn);
 
         getShow = findViewById(R.id.getShow);
+        downloadShow = findViewById(R.id.downloadShow);
+        imageLoading = findViewById(R.id.imageLoading);
 
         getBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
@@ -61,14 +64,14 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
                 mPresenter.getRequest(OkConstant.GET_URL, null);
                 break;
             case R.id.postBtn:
-                mPresenter.postRequest(OkConstant.POST_URL,null);
+                mPresenter.postRequest(OkConstant.POST_URL, null);
                 break;
 
             case R.id.uploadBtn:
 
                 break;
             case R.id.downloadBtn:
-
+                mPresenter.downloadImageRequest(OkConstant.DOWNLOAD_URL, null);
                 break;
 
             default:
@@ -76,21 +79,29 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void showGetResult(Object resultObj) {
+    public void showGetResult(Object resultObj, boolean success) {
         //get请求结果展示
         getShow.setText(resultObj.toString());
     }
 
-    public void showPostResult(Object resultObj) {
+    public void showPostResult(Object resultObj, boolean success) {
         //post请求结果展示
     }
 
-    public void showUploadResult(Object resultObj) {
+    public void showUploadResult(Object resultObj, boolean success) {
         //Upload请求结果展示
     }
 
-    public void showDownloadResult(Object resultObj) {
-        //Download请求结果展示
+    public void showDownloadImageResult(Object resultObj, boolean success) {
+        //Download图片请求结果展示
+        if (success) {
+            if (resultObj instanceof Bitmap) {
+                downloadShow.setImageBitmap((Bitmap)resultObj);
+            }
+        }
     }
 
+    public void showDownloadImageLoading(int progress) {
+        imageLoading.setText(progress);
+    }
 }

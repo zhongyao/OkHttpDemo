@@ -14,7 +14,7 @@ public class OkHttpRequestType {
 
         UPLOAD(3),
 
-        DOWNLOAD(4);
+        DOWNLOAD_IMAGE(4);
 
         private int value;
 

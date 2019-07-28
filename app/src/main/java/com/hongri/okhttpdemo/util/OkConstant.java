@@ -10,4 +10,5 @@ public class OkConstant {
     //public static final String GET_URL = "https://www.qq.com/";
     public static final String GET_URL = "https://api.apiopen.top/getSongPoetry?page=1&count=20";
     public static final String POST_URL = "";
+    public static final String DOWNLOAD_URL = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
 }

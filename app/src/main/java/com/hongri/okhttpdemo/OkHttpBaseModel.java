@@ -11,4 +11,6 @@ public abstract class OkHttpBaseModel {
     public void getRequest(String url, RequestParams params, IDisposeDataCallback listener) {}
 
     public void postRequest(String url, RequestParams params, IDisposeDataCallback listener) {}
+
+    public void downloadImageRequest(String url, RequestParams params, IDisposeDataCallback listener) {}
 }

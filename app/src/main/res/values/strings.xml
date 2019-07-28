@@ -4,5 +4,5 @@
     <string name="get_request">OkHttp的Get请求</string>
     <string name="post_request">OkHttp的Post请求</string>
     <string name="upload_request">OkHttp的上传请求</string>
-    <string name="download_request">OkHttp的下载请求</string>
+    <string name="download_request">OkHttp的图片下载请求</string>
 </resources>

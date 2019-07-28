@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.hongri.okhttpdemo.okhttp.https.SSLSocketClient;
 import com.hongri.okhttpdemo.okhttp.listener.DisposeDataHandler;
 import com.hongri.okhttpdemo.okhttp.response.CommonFileCallback;
+import com.hongri.okhttpdemo.okhttp.response.CommonImageCallback;
 import com.hongri.okhttpdemo.okhttp.response.CommonJsonCallback;
 import okhttp3.Call;
 import okhttp3.Interceptor;
@@ -37,7 +38,7 @@ public class CommonOkHttpClient {
         okHttpBuilder.readTimeout(TIME_OUT, TimeUnit.SECONDS);
         okHttpBuilder.writeTimeout(TIME_OUT, TimeUnit.SECONDS);
         okHttpBuilder.followRedirects(true);
-        okHttpBuilder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory(),SSLSocketClient.trustManager);
+        okHttpBuilder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.trustManager);
         okHttpBuilder.hostnameVerifier(SSLSocketClient.getHostnameVerifier());
 
         mOkHttpClient = okHttpBuilder.build();
@@ -57,9 +58,15 @@ public class CommonOkHttpClient {
         return call;
     }
 
-    public static Call downloadFile(Request request, DisposeDataHandler handle) {
+    public static Call downloadFile(Request request, DisposeDataHandler handler) {
         Call call = mOkHttpClient.newCall(request);
-        call.enqueue(new CommonFileCallback(handle));
+        call.enqueue(new CommonFileCallback(handler));
+        return call;
+    }
+
+    public static Call downloadImage(Request request, DisposeDataHandler handler) {
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new CommonImageCallback(handler));
         return call;
     }
 
