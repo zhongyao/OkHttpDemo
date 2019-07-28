@@ -64,6 +64,7 @@ public class CommonImageCallback implements Callback {
             return;
         }
         //One thing to remember with stream : Reading or printing the outputStream will close it
+        //注意：如果获取一次流，会自动关闭。
         final InputStream inputStream = response.body().byteStream();
         mDeliveryHandler.post(new Runnable() {
             @Override
