@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical"
-              tools:context="com.hongri.okhttpdemo.OkHttpActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.hongri.okhttpdemo.OkHttpActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
+        android:text="OkHttp的基础应用"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/getBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/get_request"/>
+        android:text="@string/get_request" />
 
     <TextView
         android:id="@+id/getShow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/postBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/post_request"/>
+        android:text="@string/post_request" />
 
     <Button
         android:id="@+id/uploadBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/upload_request"/>
+        android:text="@string/upload_request" />
 
     <Button
         android:id="@+id/downloadBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/download_request"/>
+        android:text="@string/download_request" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -44,13 +52,13 @@
         <ImageView
             android:id="@+id/downloadShow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/imageLoading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"/>
+            android:gravity="center" />
     </FrameLayout>
 
 </LinearLayout>
