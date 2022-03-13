@@ -5,7 +5,11 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import com.hongri.okhttpdemo.okhttp.dns.OkHttpDNS;
+import com.hongri.okhttpdemo.okhttp.eventlistener.HttpEventListener;
 import com.hongri.okhttpdemo.okhttp.https.SSLSocketClient;
+import com.hongri.okhttpdemo.okhttp.interceptor.CustomInterceptor;
+import com.hongri.okhttpdemo.okhttp.interceptor.NetworkInterceptor;
 import com.hongri.okhttpdemo.okhttp.listener.DisposeDataHandler;
 import com.hongri.okhttpdemo.okhttp.response.CommonFileCallback;
 import com.hongri.okhttpdemo.okhttp.response.CommonImageCallback;
@@ -35,29 +39,16 @@ public class CommonOkHttpClient {
          * addInterceptor 应用拦截器：
          * 应用拦截器因为只会调用一次，通常用于统计客户端的网络请求发起情况。
          */
-        okHttpBuilder.addInterceptor(new Interceptor() {
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Response response = chain.proceed(request);
-                Log.d(TAG, "request:" + request + " response:" + response.toString());
-//                throw new RuntimeException();
-                return response;
-            }
-        });
+        okHttpBuilder.addInterceptor(new CustomInterceptor());
 
         /**
          * addNetworkInterceptor 网络拦截器：
          * 网络拦截器一次调用代表了一定会发起一次网络通信，因此通常可用于网络链路上传输的数据。
          */
-        okHttpBuilder.addNetworkInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Response response = chain.proceed(request);
-                Log.d(TAG, "network ---> request:" + request + " response:" + response.toString());
-                return response;
-            }
-        });
+        okHttpBuilder.addNetworkInterceptor(new NetworkInterceptor());
+
+        okHttpBuilder.dns(OkHttpDNS.getInstance());
+        okHttpBuilder.eventListenerFactory(HttpEventListener.FACTORY);
         okHttpBuilder.connectTimeout(TIME_OUT, TimeUnit.SECONDS);
         okHttpBuilder.readTimeout(TIME_OUT, TimeUnit.SECONDS);
         okHttpBuilder.writeTimeout(TIME_OUT, TimeUnit.SECONDS);

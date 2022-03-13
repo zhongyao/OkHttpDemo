@@ -61,4 +61,10 @@
             android:gravity="center" />
     </FrameLayout>
 
+    <Button
+        android:id="@+id/ok_intercept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok_intercept" />
+
 </LinearLayout>

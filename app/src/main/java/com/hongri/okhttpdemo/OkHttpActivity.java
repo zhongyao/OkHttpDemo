@@ -18,6 +18,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
     private TextView getShow;
     private ImageView downloadShow;
     private TextView imageLoading;
+    private Button OkInterceptor;
 
     private OkHttpPresenter mPresenter;
 
@@ -37,10 +38,13 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         downloadShow = findViewById(R.id.downloadShow);
         imageLoading = findViewById(R.id.imageLoading);
 
+        OkInterceptor = findViewById(R.id.ok_intercept);
+
         getBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
         downloadBtn.setOnClickListener(this);
+        OkInterceptor.setOnClickListener(this);
 
     }
 
@@ -73,7 +77,9 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
             case R.id.downloadBtn:
                 mPresenter.downloadImageRequest(OkConstant.DOWNLOAD_URL, null);
                 break;
+            case R.id.ok_intercept:
 
+                break;
             default:
                 break;
         }
