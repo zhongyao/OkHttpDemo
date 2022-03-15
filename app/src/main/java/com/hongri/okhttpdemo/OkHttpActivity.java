@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.hongri.okhttpdemo.okhttp.request.RequestParams;
 import com.hongri.okhttpdemo.util.OkConstant;
 
 /**
@@ -68,7 +70,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
                 mPresenter.getRequest(OkConstant.GET_URL, null);
                 break;
             case R.id.postBtn:
-                mPresenter.postRequest(OkConstant.POST_URL, null);
+                mPresenter.postRequest(OkConstant.POST_URL, createPostParams());
                 break;
 
             case R.id.uploadBtn:
@@ -83,6 +85,16 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    private RequestParams createPostParams() {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("weaid", "1");
+        requestParams.put("date", "2018-08-13");
+        requestParams.put("appkey", "10003");
+        requestParams.put("sign", "b59bc3ef6191eb9f747dd4e83c99f2a4");
+        requestParams.put("format", "json");
+        return requestParams;
     }
 
     public void showGetResult(Object resultObj, boolean success) {
@@ -102,7 +114,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         //Download图片请求结果展示
         if (success) {
             if (resultObj instanceof Bitmap) {
-                downloadShow.setImageBitmap((Bitmap)resultObj);
+                downloadShow.setImageBitmap((Bitmap) resultObj);
             }
         }
     }
