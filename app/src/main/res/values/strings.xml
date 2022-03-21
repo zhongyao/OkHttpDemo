@@ -6,4 +6,5 @@
     <string name="upload_request">OkHttp的上传请求</string>
     <string name="download_request">OkHttp的图片下载请求</string>
     <string name="ok_intercept">OkHttp拦截器</string>
+    <string name="use_retrofit">Retrofit应用</string>
 </resources>

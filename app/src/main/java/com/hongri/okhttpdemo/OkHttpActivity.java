@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hongri.okhttpdemo.okhttp.request.RequestParams;
+import com.hongri.okhttpdemo.retrofit.RetrofitApi;
+import com.hongri.okhttpdemo.retrofit.RetrofitManager;
 import com.hongri.okhttpdemo.util.OkConstant;
 
 /**
@@ -21,6 +23,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
     private ImageView downloadShow;
     private TextView imageLoading;
     private Button OkInterceptor;
+    private Button useRetrofit;
 
     private OkHttpPresenter mPresenter;
 
@@ -41,12 +44,14 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         imageLoading = findViewById(R.id.imageLoading);
 
         OkInterceptor = findViewById(R.id.ok_intercept);
+        useRetrofit = findViewById(R.id.useRetrofit);
 
         getBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
         uploadBtn.setOnClickListener(this);
         downloadBtn.setOnClickListener(this);
         OkInterceptor.setOnClickListener(this);
+        useRetrofit.setOnClickListener(this);
 
     }
 
@@ -80,7 +85,10 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
                 mPresenter.downloadImageRequest(OkConstant.DOWNLOAD_URL, null);
                 break;
             case R.id.ok_intercept:
-
+                break;
+            case R.id.useRetrofit:
+                RetrofitManager.getInstance().getRetrofitApi().
+                        create(RetrofitApi.class).getBook("232", "450");
                 break;
             default:
                 break;
