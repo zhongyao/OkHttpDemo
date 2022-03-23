@@ -1,14 +1,16 @@
 package com.hongri.okhttpdemo.retrofit;
 
+import java.util.Map;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -69,7 +71,7 @@ public interface RetrofitApi {
      * Post请求【包含参数】
      * www.shadow.com/account/bookList
      */
-    @FormUrlEncoded
+    @FormUrlEncoded//[form]提交
     @POST("account/bookList") //等价于 @PUT("account/bookList")
     Call<ResponseBody> getBookList(@Field("page") String page, @Field("type") String type);
 
@@ -78,9 +80,22 @@ public interface RetrofitApi {
      * www.shadow.com/account/bookName/bookList
      * @return
      */
-    @FormUrlEncoded
+    @FormUrlEncoded//[form]提交
     @POST("account/{bookName}/bookList")
     Call<ResponseBody> getBookList(@Path("bookName") String bookName, @Field("page") String page, @Field("type") String type);
 
+    /**
+     * Post实现表单[form]提交:
+     * www.shadow.com/account/bookName/bookList
+     */
+    @FormUrlEncoded
+    @POST("account/bookName/bookList")
+    Call<ResponseBody> getBookList(@FieldMap Map<String, Object> map);
+
+    /**
+     * Post实现Json提交
+     */
+    @POST("account/bookName/bookList")
+    Call<ResponseBody> getBookListPost(@Body Map<String, Object> map);
 
 }
