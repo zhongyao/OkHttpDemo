@@ -9,14 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hongri.okhttpdemo.okhttp.request.RequestParams;
+import com.hongri.okhttpdemo.retrofit.ResponseBody;
 import com.hongri.okhttpdemo.retrofit.RetrofitApi;
 import com.hongri.okhttpdemo.retrofit.RetrofitManager;
+import com.hongri.okhttpdemo.rxjava.BaseSubscriber;
+import com.hongri.okhttpdemo.rxjava.IBaseListener;
+import com.hongri.okhttpdemo.rxjava.SubscriptionManager;
 import com.hongri.okhttpdemo.util.OkConstant;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * 用来测试OKHttp的简单使用
  */
-public class OkHttpActivity extends Activity implements View.OnClickListener {
+public class OkHttpActivity extends Activity implements View.OnClickListener, IBaseListener {
 
     private Button getBtn, postBtn, uploadBtn, downloadBtn;
     private TextView getShow;
@@ -24,6 +30,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
     private TextView imageLoading;
     private Button OkInterceptor;
     private Button useRetrofit;
+    private Button retrofitRxJava;
 
     private OkHttpPresenter mPresenter;
 
@@ -45,6 +52,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
 
         OkInterceptor = findViewById(R.id.ok_intercept);
         useRetrofit = findViewById(R.id.useRetrofit);
+        retrofitRxJava = findViewById(R.id.retrofitRxJava);
 
         getBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
@@ -52,6 +60,7 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
         downloadBtn.setOnClickListener(this);
         OkInterceptor.setOnClickListener(this);
         useRetrofit.setOnClickListener(this);
+        retrofitRxJava.setOnClickListener(this);
 
     }
 
@@ -89,6 +98,35 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
             case R.id.useRetrofit:
                 RetrofitManager.getInstance().getRetrofitApi().
                         create(RetrofitApi.class).getBook("232", "450");
+                break;
+            case R.id.retrofitRxJava:
+                RetrofitManager.getInstance().getRetrofitApi().
+                        create(RetrofitApi.class).getHistoryBook("666", "history")
+                .subscribeOn(Schedulers.io())//切换到IO线程
+                .observeOn(AndroidSchedulers.mainThread())//切换到主线程
+                .subscribe(new BaseSubscriber<ResponseBody>(this) {
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        super.onNext(responseBody);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        super.onError(t);
+                    }
+
+                });
                 break;
             default:
                 break;
@@ -129,5 +167,21 @@ public class OkHttpActivity extends Activity implements View.OnClickListener {
 
     public void showDownloadImageLoading(int progress) {
         imageLoading.setText(progress);
+    }
+
+    @Override
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failure(Object o) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SubscriptionManager.getInstance().cancel(this);
     }
 }

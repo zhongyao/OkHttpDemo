@@ -13,6 +13,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * @author：hongri
@@ -35,6 +36,13 @@ public interface RetrofitApi {
      */
     @GET("account/book")
     Call<ResponseBody> getBook(@Query("pageIndex") String pageIndex, @Query("pageSize") String pageSize);
+
+    /**
+     * Get请求【带参】 -- 返回值是Observable：
+     * www.shadow.com/account/book?pageIndex=1&pageSize=20"
+     */
+    @GET("account/book")
+    Observable<ResponseBody> getHistoryBook(@Query("pageIndex") String pageIndex, @Query("pageSize") String pageSize);
 
     /**
      * Get请求【动态修改path】：
